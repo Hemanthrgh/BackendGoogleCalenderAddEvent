@@ -32,10 +32,14 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/google/redirect',async (req,res)=>{
+    try{
     const code=req.query.code;
     const {tokens}=await oauth2Client.getToken(code)
     oauth2Client.setCredentials(tokens);
     console.log(tokens);
+    }catch(err){
+        console.log(err);
+    }
     res.send('redirect working');
 })
 app.get("/schecule_event",async (req,res)=>{
